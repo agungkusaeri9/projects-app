@@ -1,0 +1,50 @@
+<div class="rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition p-5 bg-white">
+  <!-- Image -->
+  <div class="w-full h-48 mb-4 overflow-hidden rounded-lg">
+    <img [src]="project.image" alt="Project Image" class="w-full h-full object-cover" />
+  </div>
+
+  <!-- Title -->
+  <h3 class="text-xl font-semibold text-gray-800 mb-2">
+    {{ project.name }}
+  </h3>
+
+  <!-- Description -->
+  <p class="text-gray-600 text-sm mb-4">
+    {{ project.short_description }}
+  </p>
+
+  <!-- Category -->
+  <span
+    class="inline-block text-xs font-medium text-indigo-600 bg-indigo-100 px-2 py-1 rounded-md mb-3"
+  >
+    {{ project.category.name }}
+  </span>
+
+  <!-- Tags -->
+  <div class="flex flex-wrap gap-2 mb-4">
+    <span
+      *ngFor="let tag of project.tags"
+      class="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-md border border-gray-200"
+    >
+      #{{ tag.name }}
+    </span>
+  </div>
+
+  <!-- Buttons -->
+  <div class="flex justify-between">
+    <a
+      [href]="project.link"
+      target="_blank"
+      class="px-4 py-2 text-sm font-medium bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition"
+    >
+      Visit
+    </a>
+    <button
+      (click)="onDetail()"
+      class="px-4 py-2 text-sm font-medium border border-gray-300 rounded-md hover:bg-gray-100 transition"
+    >
+      Detail
+    </button>
+  </div>
+</div>
