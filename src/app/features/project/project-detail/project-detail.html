@@ -1,1 +1,56 @@
-<p>project-detail works!</p>
+<ng-container *ngIf="project$ | async as project; else isLoading">
+  <!-- Breadcrumb -->
+  <nav class="text-sm mb-6">
+    <ol class="flex items-center gap-2 text-gray-500">
+      <li><a routerLink="/" class="hover:text-gray-800">Home</a></li>
+      <li>/</li>
+      <li class="text-gray-900 font-medium">
+        {{ project.name }}
+      </li>
+    </ol>
+  </nav>
+
+  <!-- Title -->
+  <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-900">
+    {{ project.name }}
+  </h1>
+
+  <!-- Meta -->
+  <div class="mt-3 flex flex-wrap items-center gap-3 text-sm text-gray-600">
+    <span class="inline-flex items-center px-2.5 py-1 rounded-full bg-gray-100 text-gray-800">
+      {{ project.category?.name }}
+    </span>
+    <span>•</span>
+    <time>{{ project.created_at | date : 'dd MMM yyyy' }}</time>
+  </div>
+
+  <!-- Author -->
+  <div class="mt-6 flex items-center gap-3">
+    <img
+      [src]="project.author?.image"
+      alt="Author"
+      class="w-10 h-10 rounded-full object-cover ring-2 ring-gray-200"
+    />
+    <div>
+      <p class="font-semibold text-gray-900">{{ project.author?.name }}</p>
+      <p class="text-sm text-gray-500">{{ project.author?.role }}</p>
+    </div>
+  </div>
+
+  <!-- Cover -->
+  <figure class="mt-8">
+    <img
+      [src]="project.image"
+      [alt]="project.name"
+      class="w-full h-80 sm:h-96 object-cover rounded-xl border border-gray-200"
+    />
+  </figure>
+
+  <!-- Content -->
+  <article class="mt-8 prose prose-slate max-w-none" [innerHTML]="project.description"></article>
+</ng-container>
+
+<!-- 👇 ini yang wajib buat `else isLoading` -->
+<ng-template #isLoading>
+  <div class="py-16 text-center text-gray-500 animate-pulse">Loading…</div>
+</ng-template>

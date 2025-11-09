@@ -15,4 +15,10 @@ export class ProjectService {
       .get<ApiResponse<Project[]>>('/api/projects')
       .pipe(tap((res) => console.log(res)));
   }
+
+  getBySlug(slug: string): Observable<ApiResponse<Project>> {
+    return this.http
+      .get<ApiResponse<Project>>(`/api/projects/${slug}`)
+      .pipe(tap((res) => console.log(res)));
+  }
 }
